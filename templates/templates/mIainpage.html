@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body {font-family: "Lato", sans-serif;
+background-image: url(http://www.photoplato.com/photoplato/24998-black-and-white-background.png);}
+
+.sidebar {
+  height: 100%;
+  width: 160px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 16px;
+}
+
+.sidebar a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #818181;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: #f1f1f1;
+}
+
+.main {
+  margin-left: 160px; /* Same as the width of the sidenav */
+  padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidebar {padding-top: 15px;}
+  .sidebar a {font-size: 18px;}
+}
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+}
+
+.title {
+  color: grey;
+  font-size: 18px;
+}
+
+button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+a {
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+}
+
+button:hover, a:hover {
+  opacity: 0.7;
+}
+#mySidenav a {
+  position:fixed;
+  left: 1300px;
+  right: -80px;
+ 
+
+  transition: 5.0s;
+  padding: 15px;
+  width: 147px;
+  
+  text-decoration: none;
+  font-size: 18px;
+  color: white;
+  border-radius: 0 10px 10px 0;
+}
+
+#mySidenav a:hover {
+  left: 0;
+}
+
+#about {
+  top: 20px;
+  background-color: #4CAF50;
+}
+
+#blog {
+  top: 80px;
+  background-color: #2196F3;
+}
+
+#projects {
+  top: 140px;
+  background-color: #555;
+}
+
+#contact {
+  top: 200px;
+  background-color: #555
+}
+
+</style>
+</head>
+<body>
+
+<div class="sidebar"><br> <br>
+  <a href="file:///C:/Users/Rajesh/Documents/profile.html"><i class="fa fa-fw fa-home"></i> Profile</a><br><br>
+  <div class="card">
+    <img src="data:image/png;base64,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" alt="John" style="width:100%">
+   <br><br> <h1  style="color: wheat;">John Doe</h1>
+    <p class="title" style="color: wheat;">CEO & Founder</p>
+    <p style="color: wheat;">Harvard University</p> <br> <br> <br> <br>
+   
+  
+  
+</div>
+<div id="mySidenav" class="sidenav" ><br> <br> <br> <br> <br>
+    <a href="#" id="about" style="text-align:right;">TimeTable</a>
+    <a href="#" id="blog"style="text-align:right;">Students</a>
+     <a href="#" id="projects"style="text-align:right;">Contact Info</a>
+    
+  </div>
+
+</body>
+</html>
