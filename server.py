@@ -1,4 +1,4 @@
-from flask import Flask,request,redirect,url_for
+from flask import Flask,request,redirect,url_for,render_template
 from firebase_admin import credentials, db
 import firebase_admin
 #import firebase_data
@@ -6,6 +6,12 @@ app = Flask(__name__)
 
 ################################################################################
 ##################### FIREBASE CREDENTIALS #####################################
+cred = credentials.Certificate(r'C:\Users\jain\Downloads\vips-hack-firebase-adminsdk-de023-b4d860fd84.json')
+
+# Initialize the app with a service account, granting admin privileges
+firebase_admin.initialize_app(cred, {
+    'databaseURL': 'https://vips-hack.firebaseio.com/'
+})
 
 ####################FIREBASE CREDENTIALS########################################
 ################################################################################
@@ -13,24 +19,24 @@ app = Flask(__name__)
 
 
 def upload_data(*data):
-    ref = db.reference("user_cred")
-    child=ref.child(str(data[1]))
+    ref = db.reference("temp")
+    child=ref.child(str(data[0]))
     child.set({
-        "email": data[0],
-        "password": data[1],
-        "username": data[2],
-        "number": data[3],
-        "institute": data[4],
-        "qualification": data[5]
+        "email": str(data[0]),
+        "password": str(data[1]),
+        "username": str(data[2]),
+        "number": str(data[3]),
+        "institute": str(data[4]),
+        "qualification": str(data[5])
     })
 
     
 def check_cred(email,password):
-    ref=db.reference("user_cred")
+    ref=db.reference("temp")
     if str(ref.child(str(email)).get()) != "None":
         child=ref.child(str(email))
         data=child.get()
-        if data["password"] == password:
+        if data["password"] == str(password):
             return True
         else:
             return False
@@ -39,7 +45,7 @@ def check_cred(email,password):
     
 
 
-@app.route("/register")
+@app.route("/register", methods = ["POST"])
 def register():
     email=request.form.get("email")
     password=request.form.get("password")
@@ -48,18 +54,20 @@ def register():
     institute=request.form.get("institute")
     qualification=request.form.get("qualification")
     upload_data(email,password,username,number,institute,qualification)
-    redirect(url_for( login() ) )
+    return render_template( "a (1).html")
 
-@app.route('/login')
+@app.route('/login', methods = ["POST","GET"])
 def login():
+
     email=request.form.get("email")
     password = request.form.get("password")
     login_type= check_cred(email,password)
     if login_type:
-        redirect("file:///E:/vips/vips/Aacharya-master/mIainpage.html")
+        return render_template("mIainpage.html")
     else:
-        return "Goli beta Mastiii nhiiiii"
-    return "done"
+#        return render_template("a(1).html")
+        return render_template( "a (1).html")
+#        return "invalid credentials"
 
 
 if __name__ == "__main__":
