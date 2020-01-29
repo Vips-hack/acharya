@@ -6,11 +6,11 @@ app = Flask(__name__)
 
 ################################################################################
 ##################### FIREBASE CREDENTIALS #####################################
-cred = credentials.Certificate(r'C:\Users\jain\Downloads\vips-hack-firebase-adminsdk-de023-b4d860fd84.json')
+cred = credentials.Certificate(r'path to the credential json file should be placed here')
 
 # Initialize the app with a service account, granting admin privileges
 firebase_admin.initialize_app(cred, {
-    'databaseURL': 'https://vips-hack.firebaseio.com/'
+    'databaseURL': 'database url should be present here'
 })
 
 ####################FIREBASE CREDENTIALS########################################
